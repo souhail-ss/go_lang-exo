@@ -60,26 +60,23 @@ func actionRemove(d *dictionary.Dictionary, reader *bufio.Reader) {
 
 func actionList(d *dictionary.Dictionary) {
 
-	wordList, entries := d.List()
+	// wordList, entries := d.List()
 
-<<<<<<< HEAD
-	if len(wordList) == 0 {
-		fmt.Println("No words in the dictionary.")
-		return
-	}
+	// if len(wordList) == 0 {
+	// 	fmt.Println("No words in the dictionary.")
+	// 	return
+	// }
 
-	fmt.Println("Word List:", strings.Join(wordList, ", "))
+	// fmt.Println("Word List:", strings.Join(wordList, ", "))
 
-	fmt.Println("Entries:")
-	for _, word := range wordList {
-		entry, _ := entries[word]
-		fmt.Printf("%s: %s\n", word, entry)
+	// fmt.Println("Entries:")
+	// for _, word := range wordList {
+	// 	entry, _ := entries[word]
+	// 	fmt.Printf("%s: %s\n", word, entry)
 
-	}
-=======
-	fmt.Println("Word List:", wordList)
+	// }
+	// fmt.Println("Word List:", wordList)
 
-	fmt.Println("Entries:", entries)
+	// fmt.Println("Entries:", entries)
 
->>>>>>> 7eda7f802757da335ace936db98761f0089e4cb9
 }
