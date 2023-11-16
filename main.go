@@ -62,8 +62,17 @@ func actionList(d *dictionary.Dictionary) {
 
 	wordList, entries := d.List()
 
-	fmt.Println("Word List:", wordList)
+	if len(wordList) == 0 {
+		fmt.Println("No words in the dictionary.")
+		return
+	}
 
-	fmt.Println("Entries:", entries)
+	fmt.Println("Word List:", strings.Join(wordList, ", "))
 
+	fmt.Println("Entries:")
+	for _, word := range wordList {
+		entry, _ := entries[word]
+		fmt.Printf("%s: %s\n", word, entry)
+
+	}
 }
