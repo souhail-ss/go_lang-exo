@@ -15,6 +15,7 @@ func main() {
 	d := dictionary.New()
 	reader := bufio.NewReader(os.Stdin)
 
+	fmt.Println("Hello, World!")
 	for {
 		fmt.Print("Enter command (add/list/exit): ")
 		command, _ := reader.ReadString('\n')
