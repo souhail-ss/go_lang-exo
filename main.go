@@ -2,82 +2,73 @@ package main
 
 import (
 	"bufio"
-	"strings"
-
 	"fmt"
-
-	"os"
-
 	"main/dictionary"
+	"os"
+	"strings"
 )
 
 func main() {
-	d := dictionary.New()
 	reader := bufio.NewReader(os.Stdin)
+	dict := dictionary.New("dictionary.json")
 
-	fmt.Println("Hello, World!")
 	for {
-		fmt.Print("Enter command (add/list/exit): ")
+		fmt.Println("Enter command (add, define, remove, list, exit):")
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
 		switch command {
 		case "add":
-			actionAdd(d, reader)
+			actionAdd(dict, reader)
+		case "define":
+			actionDefine(dict, reader)
+		case "remove":
+			actionRemove(dict, reader)
 		case "list":
-			actionList(d)
+			actionList(dict)
 		case "exit":
-			fmt.Println("Exiting...")
 			return
 		default:
-			fmt.Println("Invalid command. Please try again.")
+			fmt.Println("Unknown command")
 		}
 	}
 }
 
 func actionAdd(d *dictionary.Dictionary, reader *bufio.Reader) {
-
 	fmt.Print("Enter word: ")
-
 	word, _ := reader.ReadString('\n')
-
 	fmt.Print("Enter definition: ")
-
 	definition, _ := reader.ReadString('\n')
 
-	d.Add(word, definition)
-
-	fmt.Println("Word added successfully.")
-
+	d.Add(strings.TrimSpace(word), strings.TrimSpace(definition))
+	fmt.Println("Added.")
 }
 
 func actionDefine(d *dictionary.Dictionary, reader *bufio.Reader) {
+	fmt.Print("Enter word: ")
+	word, _ := reader.ReadString('\n')
+	word = strings.TrimSpace(word)
 
+	entry, err := d.Get(word)
+	if err != nil {
+		fmt.Println(err)
+		return
+	}
+	fmt.Println("Definition:", entry)
 }
 
 func actionRemove(d *dictionary.Dictionary, reader *bufio.Reader) {
+	fmt.Print("Enter word: ")
+	word, _ := reader.ReadString('\n')
+	word = strings.TrimSpace(word)
 
+	d.Remove(word)
+	fmt.Println("Removed.")
 }
 
 func actionList(d *dictionary.Dictionary) {
-
-	// wordList, entries := d.List()
-
-	// if len(wordList) == 0 {
-	// 	fmt.Println("No words in the dictionary.")
-	// 	return
-	// }
-
-	// fmt.Println("Word List:", strings.Join(wordList, ", "))
-
-	// fmt.Println("Entries:")
-	// for _, word := range wordList {
-	// 	entry, _ := entries[word]
-	// 	fmt.Printf("%s: %s\n", word, entry)
-
-	// }
-	// fmt.Println("Word List:", wordList)
-
-	// fmt.Println("Entries:", entries)
-
+	words, _ := d.List()
+	for _, word := range words {
+		fmt.Println(word)
+	}
 }
