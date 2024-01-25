@@ -4,6 +4,7 @@ import (
 	"bufio"
 	"fmt"
 	"main/dictionary"
+
 	"os"
 	"strings"
 )
@@ -13,7 +14,7 @@ func main() {
 	dict := dictionary.New("dictionary.json")
 
 	for {
-		fmt.Println("Enter command (add, define, remove, list, exit):")
+		fmt.Println("Enter a command brother (add, define, remove, list, exit):")
 		command, _ := reader.ReadString('\n')
 		command = strings.TrimSpace(command)
 
@@ -29,7 +30,7 @@ func main() {
 		case "exit":
 			return
 		default:
-			fmt.Println("Unknown command")
+			fmt.Println("what are you even saying ?")
 		}
 	}
 }
